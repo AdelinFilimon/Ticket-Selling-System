@@ -13,9 +13,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.NotSupportedException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class ShowController {
 
     private final ShowService showService;
@@ -83,18 +85,23 @@ public class ShowController {
 
     @GetMapping("/shows/{id}/download_tickets")
     public HttpEntity<byte[]> downloadSoldTickets(@PathVariable Long id) throws NotSupportedException {
-        List<Ticket> tickets = showService.getSoldTicketsAtShowById(id);
-        Exportable exportable = ExportFactory.getExportableSoldTickets(ExportType.JSON);
-        String json = exportable.exportStringFromSoldTickets(tickets);
-        String filename = "soldTickets" + id + exportable.getFileExtension();
-        byte[] body = json.getBytes();
+        try {
+            List<Ticket> tickets = showService.getSoldTicketsAtShowById(id);
+            Exportable exportable = ExportFactory.getExportableSoldTickets(ExportType.JSON);
+            String json = exportable.exportStringFromSoldTickets(tickets);
+            String filename = "soldTickets" + id + exportable.getFileExtension();
+            byte[] body = json.getBytes();
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Disposition", String.format("attachment; filename=\"%s\"", filename));
-        headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
-        headers.add("Pragma", "no-cache");
-        headers.add("Expires", "0");
-        return new HttpEntity<>(body, headers);
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Content-Disposition", String.format("attachment; filename=\"%s\"", filename));
+            headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+            headers.add("Pragma", "no-cache");
+            headers.add("Expires", "0");
+            return new HttpEntity<>(body, headers);
+
+        } catch (Exception exception) {
+            return new HttpEntity<>("No show found with this ID".getBytes(StandardCharsets.UTF_8), null);
+        }
     }
 
 }

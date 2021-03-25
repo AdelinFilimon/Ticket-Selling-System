@@ -112,9 +112,7 @@ public class User implements JsonConvertible, UserDetails {
         return role;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
+    public void setRole(Role role) {this.role = role; }
 
     @Override
     public String toString() {
@@ -124,7 +122,7 @@ public class User implements JsonConvertible, UserDetails {
     @Override
     public JSONObject convertToJson() {
         JSONObject json = new JSONObject();
-        json.put("id", id);
+        json.put("id", id.toString());
         json.put("username", userName);
         json.put("password", password);
         json.put("first_name", firstName);

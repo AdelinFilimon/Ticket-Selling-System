@@ -70,4 +70,19 @@ public class UserService {
         User user = getCashierById(id);
         userRepository.delete(user);
     }
+
+    public void insertDemoAdmin() {
+        if (userRepository.findByUsername("admin") == null) {
+            User admin = new User();
+            admin.setUserName("admin");
+            admin.setFirstName("Adelin");
+            admin.setLastName("Filimon");
+            admin.setEmail("demoEmail@yahoo.com");
+            admin.setPassword(passwordEncoder.encode("admin"));
+            admin.setRole(Role.ADMINISTRATOR);
+            userRepository.save(admin);
+        }
+    }
+
+
 }
