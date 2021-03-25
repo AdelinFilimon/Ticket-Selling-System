@@ -19,6 +19,9 @@ public class TicketSellingSystemApplication {
 
     @Bean
     public CommandLineRunner insertDemoAdmin() {
-        return args -> userService.insertDemoAdmin();
+        return args -> {
+            userService.insertDemoAdmin();
+            userService.insertDemoCashier();
+        };
     }
 }

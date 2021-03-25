@@ -84,5 +84,18 @@ public class UserService {
         }
     }
 
+    public void insertDemoCashier() {
+        if (userRepository.findByUsername("cashier") == null) {
+            User cashier = new User();
+            cashier.setUserName("cashier");
+            cashier.setFirstName("Adelin");
+            cashier.setLastName("Filimon");
+            cashier.setEmail("demoEmail@yahoo.com");
+            cashier.setPassword(passwordEncoder.encode("cashier"));
+            cashier.setRole(Role.CASHIER);
+            userRepository.save(cashier);
+        }
+    }
+
 
 }

@@ -45,7 +45,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/shows/*/download_tickets").hasAnyAuthority("cashier", "administrator")
-                .antMatchers("/users/**", "/shows/**").hasAuthority("administrator")
+                .antMatchers("/cashiers/**", "/shows/**").hasAuthority("administrator")
                 .antMatchers("/tickets/**").hasAuthority("cashier")
                 .anyRequest()
                 .authenticated()
