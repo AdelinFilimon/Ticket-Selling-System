@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+body {
+    overflow: hidden;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.home, .login, .administrator_page, .cashier_page {
+    display: flex;
+    height: 90vh;
+    font-size: 1rem;
+}
+
+.administrator_page {
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.cashier_page {
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.home {
+    background-image: url('images/UNTOLD2018_0804_041646_9121_ALIVECOVERAGE_CTL.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
