@@ -97,5 +97,16 @@ public class UserService {
         }
     }
 
+    public User getUserByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        if (user == null)
+            throw new UserNotFoundException(username);
+        return user;
+    }
+
+    public boolean checkPassword(String password, User user) {
+        return passwordEncoder.matches(password, user.getPassword());
+    }
+
 
 }

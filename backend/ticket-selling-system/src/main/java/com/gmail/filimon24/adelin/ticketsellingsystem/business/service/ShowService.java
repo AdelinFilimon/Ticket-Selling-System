@@ -23,7 +23,9 @@ public class ShowService {
     public Show addShow(Show show) {
         if (show.getId() != null)
             throw new IllegalArgumentException("Expected show ID null");
-        return showRepository.save(show);
+
+        Show savedShow = showRepository.save(show);
+        return getShowById(savedShow.getId());
     }
 
     public Show updateShow(Long id, Show show) {
@@ -50,7 +52,8 @@ public class ShowService {
         nr_of_tickets = show.getNrOfTickets();
         if (nr_of_tickets != dbShow.getNrOfTickets()) dbShow.setNrOfTickets(nr_of_tickets);
 
-        return showRepository.save(dbShow);
+        showRepository.save(dbShow);
+        return getShowById(dbShow.getId());
     }
 
     public List<Show> getAllShows() {

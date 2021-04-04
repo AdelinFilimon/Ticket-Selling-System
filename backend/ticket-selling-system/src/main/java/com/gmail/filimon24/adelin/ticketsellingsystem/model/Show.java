@@ -74,7 +74,7 @@ public class Show implements JsonConvertible {
         this.date = date;
     }
 
-    public int getNrOfTickets() {
+    public Integer getNrOfTickets() {
         return nrOfTickets;
     }
 
@@ -97,6 +97,7 @@ public class Show implements JsonConvertible {
         json.put("id", id);
         json.put("genre", genre.getGenre());
         json.put("artist", artist.getDjName());
+        json.put("date", date.toString());
         json.put("title", title);
         json.put("nr_of_tickets", nrOfTickets);
         return json;
